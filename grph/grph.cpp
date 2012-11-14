@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <ctype.h>
 
 using namespace std;
 
@@ -31,17 +32,15 @@ NEXT:
   // find overlap graph O_k where k=3
   size_t k = 3;
 
-  for ( auto i : v ) {
-    for ( auto j : v ) {
-      if ( i.data == j.data )
-        continue;
+  for ( auto i : v )
+  for ( auto j : v ) {
+    if ( i.data == j.data )
+      continue;
 
-      // suffix = prefix?
-      if ( i.data.substr(i.data.length()-k,k) ==
-           j.data.substr(0,k) )
-      {
-        cout << i.name << " " << j.name << endl;
-      }
-    }
+    string suffix = i.data.substr(i.data.length()-k,k);
+    string prefix = j.data.substr(0,k);
+
+    if ( suffix == prefix )
+      cout << i.name << " " << j.name << endl;
   }
 }
